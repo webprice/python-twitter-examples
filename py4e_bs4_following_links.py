@@ -22,6 +22,7 @@ while repeat != 0:
 
 # Retrieve all of the anchor tags
     tags = soup('a')
-    url = tags[position].get('href',None)
+    #downlow was an error, positioning in python starts from 0, while in excercise from 1
+    url = tags[position-1].get('href',None)
     print(url)
     repeat = repeat-1
