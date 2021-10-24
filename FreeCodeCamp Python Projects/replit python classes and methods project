@@ -1,0 +1,63 @@
+class Category:
+    """Category model"""
+    def __init__(self, category_name):
+        """food,clothing,entertainment INITIALIZATION"""
+        self.category_name=category_name
+        self.ledger = []
+        self.realcash=int()
+
+    def deposit(self,amount=0,description=''):
+        self.amount=amount
+        self.description = description
+        print(self.category_name,self.amount,self.description)
+        x = f'{{"amount": {self.amount}, "description": {self.description}}}'
+        self.ledger.append(x)
+        print("MY X",x)
+        print(self.ledger)
+        self.realcash = self.realcash+self.amount
+    def withdraw(self,amount,description=''):
+        self.withdraw_amount=amount
+        self.withdraw_description = description
+        if self.withdraw_amount > self.amount:
+            return False
+        if self.withdraw_amount < self.amount:
+            self.withdraw_amount = self.withdraw_amount * -1
+            self.realcash = self.realcash + self.withdraw_amount
+            x = f'{{"amount": {self.withdraw_amount}, "description": {self.withdraw_description}}}'
+            self.ledger.append(x)
+            print(self.realcash)
+            return True
+    def get_balance(self):
+        return print(self.realcash)
+    def transfer(self,amount,another_category):
+        self.transferamount=amount
+        self.another_category=another_category
+        x= f'"Transfer to {self.another_category}"'
+        z = f'"Transfer from {self.category_name}"'
+        try:
+            self.withdraw(self.transferamount,x)
+            self.another_category.deposit(self.transferamount,z)
+            return True
+        except:
+            return False
+
+    def check_funds(self,amount ):
+        self.check_funds_amount=amount
+        if self.check_funds_amount > self.realcash:
+            return False
+        else:
+            return True
+
+def create_spend_chart(categories):
+    pass
+
+food = Category("Food")
+food.deposit(1000, "initial deposit")
+food.withdraw(10.15, "groceries")
+food.withdraw(15.89, "restaurant and more food for dessert")
+clothing = Category("Clothing")
+food.transfer(50, clothing)
+print(food.get_balance())
+#print(food.ledger)
+
+print("Total:",food.realcash, clothing.realcash)
