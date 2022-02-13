@@ -3,3 +3,6 @@ first - activate your venv by this command if you're on the Ubuntu server, like 
 . bin/actiavate
 install libpq-dev and python-dev:
 sudo apt-get install libpq-dev python-dev python3-dev
+
+#there is no problem if you're using pipenv over pip. 
+#With pipenv u can install it without any headaches
